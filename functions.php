@@ -1,5 +1,5 @@
 <?php
-function generaPassword($lunghezza, $usaNumeri, $usaLettere, $usaSimboli, $ripetizione) {
+function generaPassword($lunghezza, $usaNumeri, $usaMaiuscole, $usaMinuscole, $usaSimboli, $ripetizione) {
     $caratteri = '';
     if ($usaMinuscole) {
         $caratteri .= 'abcdefghijklmnopqrstuvwxyz';
