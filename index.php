@@ -5,7 +5,14 @@ include 'functions.php';
 
 if (isset($_GET['lunghezza'])) {
     $lunghezza = intval($_GET['lunghezza']);
-    $passwordGenerata = generaPassword($lunghezza);
+    $usaNumeri = isset($_GET['usaNumeri']);
+    $usaMaiuscole = isset($_GET['usaMaiuscole']);
+    $usaMinuscole = isset($_GET['usaMinuscole']);
+    $usaSimboli = isset($_GET['usaSimboli']);
+    $ripetizione = isset($_GET['ripetizione']);
+
+    $passwordGenerata = generaPassword($lunghezza, $usaNumeri, $usaMaiuscole, $usaMinuscole, $usaSimboli, $ripetizione);
+    
     $_SESSION['passwordGenerata'] = $passwordGenerata; 
     header('Location: password.php'); 
     exit(); 
@@ -16,13 +23,20 @@ if (isset($_GET['lunghezza'])) {
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>PHP Strong Password Generator</title>
+    <title>Generatore di Password</title>
 </head>
 <body>
-    <h1>Generatore di Password Molto Sicure v.1.0.0</h1>
+    <h1>Generatore di Password Sicure</h1>
     <form method="GET" action="">
-        <label for="lunghezza">Inserisci la lunghezza desiderata di caratteri per la password:</label>
-        <input type="number" id="lunghezza" name="lunghezza" min="8" required>
+        <label for="lunghezza">Lunghezza della password:</label>
+        <input type="number" id="lunghezza" name="lunghezza" min="1" required>
+        
+        <label><input type="checkbox" name="usaMaiuscole"> Maiuscole</label>
+        <label><input type="checkbox" name="usaMinuscole"> Minuscole</label>
+        <label><input type="checkbox" name="usaNumeri"> Numeri</label>
+        <label><input type="checkbox" name="usaSimboli"> Simboli</label>
+        <label><input type="checkbox" name="ripetizione"> Ripetizione caratteri</label>
+        
         <button type="submit">Genera Password</button>
     </form>
 </body>
